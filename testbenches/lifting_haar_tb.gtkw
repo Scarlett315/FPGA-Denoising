@@ -1,0 +1,32 @@
+[*] GTKWave display configuration for 'apio sim testbenches/lifting_haar_tb.v'
+[*] THIS FILE WAS GENERATED AUTOMATICALLY BY APIO.
+[*] DO NOT EDIT IT MANUALLY!
+[*] To customize this file, run 'apio sim testbenches/lifting_haar_tb.v'
+[*] and save the file from GTKWave.
+
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+
+[*]
+lifting_haar_tb.approx[15:0]
+lifting_haar_tb.checked[31:0]
+lifting_haar_tb.clk
+lifting_haar_tb.detail[16:0]
+lifting_haar_tb.errors[31:0]
+lifting_haar_tb.GAP_CYCLES
+lifting_haar_tb.have_even
+lifting_haar_tb.i[31:0]
+lifting_haar_tb.MAXV
+lifting_haar_tb.MINV
+lifting_haar_tb.NUM_PAIRS
+lifting_haar_tb.out_valid
+lifting_haar_tb.out_valid_q
+lifting_haar_tb.prev_even[15:0]
+lifting_haar_tb.ra[15:0]
+lifting_haar_tb.rb[15:0]
+lifting_haar_tb.rd_idx[31:0]
+lifting_haar_tb.rst_n
+lifting_haar_tb.seed[31:0]
+lifting_haar_tb.WIDTH
+lifting_haar_tb.wr_idx[31:0]
+lifting_haar_tb.x_in[15:0]
+lifting_haar_tb.x_valid
