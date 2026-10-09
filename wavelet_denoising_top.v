@@ -1,19 +1,20 @@
-/*module wavelet_denoising_top #(parameter WIDTH = 16) (
+module wavelet_denoising_top #(parameter WIDTH = 16) (
     input wire clk,
     input wire rst_n,
-    input wire [WIDTH-1:0] s_in,
+    input wire signed [WIDTH-1:0] s_in,
+    input wire s_in_valid,
+    input wire [WIDTH-1:0] lambda,
 
-    ouput wire [WIDTH-1:0] s_out,
+    output wire signed [WIDTH-1:0] s_out,
     output wire s_out_valid
 );
 
     // wire instantiation
-    wire [WIDTH-1:0] approx;
-    wire [WIDTH:0] detail;
-    wire lwt_out_valid;
-    wire lwt_in_valid;
+    wire signed [WIDTH-1:0] approx;
+    wire signed [WIDTH:0] detail;
+    wire odd_pending;
 
-    wire [WIDTH:0] detail_thresh;
+    wire signed [WIDTH:0] detail_thresh;
     wire thresh_out_valid;
 
     // module instantiation
@@ -21,22 +22,29 @@
         .clk(clk),
         .rst_n(rst_n),
         .s_in(s_in),
-        .s_in_valid(lwt_in_valid),
+        .s_in_valid(s_in_valid),
 
         .approx(approx),
         .detail(detail),
-        .out_valid(lwt_out_valid)
+        .odd_pending(odd_pending)
     );
 
     threshold thresh (
-        .clk(clk),
-        .rst_n(rst_n),
-
-        .in_valid(lwt_out_valid)
-        .detail_in(detail),
+        .lambda(lambda),
+        .detail(detail),
         .detail_thresh(detail_thresh)
     );
 
-endmodule
+    inverse_lwt inv(
+        .clk(clk),
+        .rst_n(rst_n),
 
-*/
+        .approx(approx),
+        .detail(detail_thresh),
+        .odd_pending(odd_pending),
+
+        .s_out(s_out),
+        .s_out_valid(s_out_valid)
+    );
+
+endmodule
