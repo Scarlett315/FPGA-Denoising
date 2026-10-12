@@ -9,7 +9,7 @@ module lifting_haar #(parameter WIDTH = 16) (
     // outputs
     output wire signed [WIDTH-1:0] approx, 
     output wire signed [WIDTH:0] detail,
-    output reg odd_pending
+    output wire odd_pending
 ); 
 
     reg split_phase; // 0 = even, 1 = odd

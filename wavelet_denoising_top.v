@@ -5,8 +5,7 @@ module wavelet_denoising_top #(parameter WIDTH = 16) (
     input wire s_in_valid,
     input wire [WIDTH-1:0] lambda,
 
-    output wire signed [WIDTH-1:0] s_out,
-    output wire s_out_valid
+    output wire signed dac_out_wire
 );
 
     // wire instantiation
@@ -16,6 +15,11 @@ module wavelet_denoising_top #(parameter WIDTH = 16) (
 
     wire signed [WIDTH:0] detail_thresh;
     wire thresh_out_valid;
+    wire [WIDTH-1:0] s_out;
+    wire s_out_valid;
+    reg dac_out;
+
+    assign dac_out_wire = dac_out;
 
     // module instantiation
     lifting_haar lwt (
@@ -45,6 +49,14 @@ module wavelet_denoising_top #(parameter WIDTH = 16) (
 
         .s_out(s_out),
         .s_out_valid(s_out_valid)
+    );
+
+    delta_sigma_dac dac(
+        .clk(clk),
+        .rst_n(rst_n),
+
+        .dac_in({~s_out[15], s_out[14:0]}), //dac unsigned (flip MSB to get from twos complement to offset binary)
+        .dac_out(dac_out)
     );
 
 endmodule
