@@ -1,4 +1,4 @@
-timestamp: "11213635404"
+timestamp: "23165635765"
 arch: ice40
 fpga_info {
   fpga_id: "ice40hx1k-vq100"
@@ -22,13 +22,10 @@ environment {
 apio_env_params {
   env_name: "default"
   board_id: "go-board"
-  top_module: "wavelet_denoising_top"
+  top_module: "go_board_top"
 }
 target {
-  sim {
-    testbench_path: "testbenches/overall_with_dac_tb.v"
-    force_sim: false
-    no_gtkwave: false
-    detach_gtkwave: false
+  upload {
+    programmer_cmd: "iceprog -d d:0/1 $SOURCE"
   }
 }
